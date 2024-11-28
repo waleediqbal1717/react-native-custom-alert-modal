@@ -44,11 +44,10 @@ yarn add react-native-custom-alert-modal
 
 
 ## Props
-(./assets/props.png)
-
+![Props Overview](./assets/props.png)
 
 ## Button Object Format (ButtonType)
-(./assets/button.png)
+![Button Object Format](./assets/button.png)
 
 ## Customization
 You can style the modal and its components by modifying the StyleSheet in the source code.
