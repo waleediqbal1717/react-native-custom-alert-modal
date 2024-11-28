@@ -11,11 +11,9 @@ or
 yarn add react-native-custom-alert-modal
 
 ## Usage
-import React, { useState } from 'react';
-import { View, Button } from 'react-native';
-import CustomAlertModal from 'react-native-custom-alert-modal';
 
-const App = () => {
+    import CustomAlertModal from 'react-native-custom-alert-modal';
+
     const [modalVisible, setModalVisible] = useState(false);
 
     const buttons = [
@@ -42,26 +40,15 @@ const App = () => {
             />
         </View>
     );
-};
 
-export default App;
+
 
 ## Props
-Prop	Type	Default	Description
-visible	boolean	false	Controls the visibility of the modal.
-title	string	null	Title text displayed at the top of the modal.
-message	string	null	Message text displayed below the title.
-buttons	Array<ButtonType>	[]	Array of button objects. Each button has a text, style, and onPress.
-onClose	() => void	null	Callback fired when the modal is closed.
+(./assets/props.png)
 
 
 ## Button Object Format (ButtonType)
-Each button object in the buttons array should have the following properties:
-
-Property	Type	Default	Description
-text	string		The text displayed on the button.
-style	string	null	Optional: 'default', 'cancel', or 'destructive'.
-onPress	function	null	Optional: Callback function triggered when the button is pressed.
+(./assets/button.png)
 
 ## Customization
 You can style the modal and its components by modifying the StyleSheet in the source code.
