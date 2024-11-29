@@ -52,6 +52,8 @@ yarn add react-native-custom-alert-modal
 ## Android View
 ![Android Overview](./assets/android.png)
 
+![Android Overview](./assets/columnButtons.png)
+
 ## Customization
 You can style the modal and its components by modifying the StyleSheet in the source code.
 Buttons can have different styles (default, cancel, destructive) for visual cues.

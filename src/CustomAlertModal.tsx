@@ -4,6 +4,9 @@ import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 type ButtonType = {
     text: string;
     style?: 'default' | 'cancel' | 'destructive'; // Optional styling
+    buttonsStyle?: 'row' | 'column';
+    backgroundColor?: string; // Dynamic background color
+    textColor?: string; // Dynamic text color
     onPress?: () => void; // Optional callback
 };
 
@@ -11,17 +14,32 @@ interface CustomAlertModalProps {
     visible: boolean;
     title?: string;
     message?: string;
-    buttons?: ButtonType[]; // Correct type for buttons array
+    buttonsStyle?: 'row' | 'column'; // Layout for buttons
+    buttons?: ButtonType[]; // Array of buttons
     onClose?: () => void; // Optional close handler
 }
-
 const CustomAlertModal: React.FC<CustomAlertModalProps> = ({
     visible,
     title,
     message,
+    buttonsStyle = 'row', // Default to row layout
     buttons = [],
     onClose,
 }) => {
+    const defaultButtons: ButtonType[] = buttons.length
+        ? buttons
+        : [
+            {
+                text: 'OK',
+                style: 'default',
+                backgroundColor: '#007BFF', // Default blue background
+                textColor: '#FFFFFF', // Default white text
+                onPress: () => {
+                    onClose?.(); // Close the modal
+                },
+            },
+        ];
+
     return (
         <Modal
             transparent
@@ -33,17 +51,36 @@ const CustomAlertModal: React.FC<CustomAlertModalProps> = ({
                 <View style={styles.modalContainer}>
                     {title && <Text style={styles.title}>{title}</Text>}
                     <Text style={styles.message}>{message}</Text>
-                    <View style={styles.buttonContainer}>
-                        {buttons.map((button: ButtonType, index: number) => (
+                    <View
+                        style={[
+                            styles.buttonContainer,
+                            { flexDirection: buttonsStyle },
+                            buttonsStyle === 'column' && styles.columnContainer, // Apply column-specific styles
+                        ]}
+                    >
+                        {defaultButtons.map((button: ButtonType, index: number) => (
                             <TouchableOpacity
                                 key={index}
-                                style={[styles.button, button.style === 'cancel' && styles.cancelButton]}
+                                style={[
+                                    styles.button,
+                                    buttonsStyle !== 'column' && styles.rowButton,
+                                    { backgroundColor: button.backgroundColor || '#007BFF' }, // Use dynamic or default color
+                                    buttonsStyle === 'column' && styles.fixedButtonSize, // Fixed size for column layout
+                                    button.style === 'cancel' && styles.cancelButton,
+                                ]}
                                 onPress={() => {
-                                    button.onPress?.(); // Safely call the onPress if it exists
+                                    button.onPress?.(); // Safely call onPress if it exists
                                     onClose?.(); // Close the modal
                                 }}
                             >
-                                <Text style={styles.buttonText}>{button.text}</Text>
+                                <Text
+                                    style={[
+                                        styles.buttonText,
+                                        { color: button.textColor || '#FFFFFF' }, // Use dynamic or default text color
+                                    ]}
+                                >
+                                    {button.text}
+                                </Text>
                             </TouchableOpacity>
                         ))}
                     </View>
@@ -84,23 +121,33 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-evenly', // Default row layout
+    },
+    columnContainer: {
+        alignItems: 'center', // Align buttons in the center
+        justifyContent: 'flex-start', // Stack buttons vertically
+    },
+    rowButton: {
+        flex: 1
     },
     button: {
-        flex: 1,
+
         marginHorizontal: 5,
         paddingVertical: 10,
         borderRadius: 5,
-        backgroundColor: '#007BFF',
+        backgroundColor: '#007BFF', // Default background
         justifyContent: 'center',
         alignItems: 'center',
     },
+    fixedButtonSize: {
+        width: '100%', // Fixed width
+        marginVertical: 5, // Spacing between buttons in column
+    },
     cancelButton: {
-        backgroundColor: '#aaa',
+        backgroundColor: '#aaa', // Cancel button default background
     },
     buttonText: {
-        color: 'white',
+        color: '#FFFFFF', // Default text color
         fontWeight: 'bold',
         fontSize: 16,
     },
