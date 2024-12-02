@@ -10,7 +10,7 @@ type ButtonType = {
     onPress?: () => void; // Optional callback
 };
 
-interface CustomAlertModalProps {
+interface AlertModalProps {
     visible: boolean;
     title?: string;
     message?: string;
@@ -18,7 +18,7 @@ interface CustomAlertModalProps {
     buttons?: ButtonType[]; // Array of buttons
     onClose?: () => void; // Optional close handler
 }
-const CustomAlertModal: React.FC<CustomAlertModalProps> = ({
+const AlertModal: React.FC<AlertModalProps> = ({
     visible,
     title,
     message,
@@ -154,4 +154,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CustomAlertModal;
+export default AlertModal;
