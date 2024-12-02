@@ -50,7 +50,8 @@ const CustomAlertModal: React.FC<CustomAlertModalProps> = ({
             <View style={styles.overlay}>
                 <View style={styles.modalContainer}>
                     {title && <Text style={styles.title}>{title}</Text>}
-                    <Text style={styles.message}>{message}</Text>
+
+                    {message && <Text style={styles.message}>{message}</Text>}
                     <View
                         style={[
                             styles.buttonContainer,
