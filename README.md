@@ -12,28 +12,35 @@ yarn add react-native-custom-alert-modal
 
 ## Usage
 
-    import CustomAlertModal from 'react-native-custom-alert-modal';
+    import AlertModal from 'react-native-custom-alert-modal';
 
     const [modalVisible, setModalVisible] = useState(false);
 
-    const buttons = [
-        {
-            text: 'Cancel',
-            style: 'cancel',
-            onPress: () => console.log('Cancel Pressed'),
-        },
-        {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
-        },
-    ];
+    const buttons: Array<ButtonType> = [
+    {
+      text: 'OK',
+      backgroundColor: 'green',
+      textColor: '#FFFFFF',
+      style: 'default',
+      onPress: () => console.log('OK Pressed'),
+    },
+    {
+      text: 'Cancel',
+      backgroundColor: 'silver',
+      textColor: '#000000',
+      style: 'cancel',
+      onPress: () => console.log('Cancel Pressed'),
+    },
+
+  ];
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Button title="Show Modal" onPress={() => setModalVisible(true)} />
-            <CustomAlertModal
+            <AlertModal
                 visible={modalVisible}
                 title="Custom Alert"
+                buttonsStyle="column"
                 message="This is a customizable alert modal."
                 buttons={buttons}
                 onClose={() => setModalVisible(false)}
