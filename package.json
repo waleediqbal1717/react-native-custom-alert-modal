@@ -1,6 +1,6 @@
 {
   "name": "react-native-custom-alert-modal",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "main": "index.ts",
   "types": "index.d.ts",
   "scripts": {

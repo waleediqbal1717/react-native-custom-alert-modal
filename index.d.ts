@@ -11,7 +11,7 @@ declare module 'react-native-custom-alert-modal' {
     onPress?: () => void; // Optional callback
     }
 
-    export interface CustomAlertModalProps extends ModalProps {
+    export interface AlertModalProps extends ModalProps {
         visible: boolean;
         title?: string;
         message?: string;
@@ -21,6 +21,6 @@ declare module 'react-native-custom-alert-modal' {
         style?: ViewStyle;
     }
 
-    const CustomAlertModal: ComponentType<CustomAlertModalProps>;
-    export default CustomAlertModal;
+    const AlertModal: ComponentType<AlertModalProps>;
+    export default AlertModal;
 }
